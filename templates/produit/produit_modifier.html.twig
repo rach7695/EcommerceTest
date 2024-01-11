@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}Modifier le produit N°{{ produit.id }}{% endblock %}
+
+{% block body %}
+
+    <a class="btn btn-dark" href="{{ path('produit_afficher') }}">Retour</a>
+
+    {{ form_start(formProduit) }} {# ouverture de la balise form #}
+
+        <div class="row">
+            <div class="col-6">
+                {{ form_row(formProduit.titre) }}
+            </div>
+            <div class="col-6">
+                {{ form_row(formProduit.prix) }}
+            </div>
+        </div>
+
+        {# {{ form_row(formProduit.description) }} #}
+        {{ form_widget(formProduit.description) }}
+        {{ form_label(formProduit.description) }}
+        {{ form_help(formProduit.description) }}
+        {{ form_errors(formProduit.description) }}
+
+        {{ form_rest(formProduit) }}
+        
+        <input type="submit" value="Modifier" class="btn btn-success w-100">
+
+    {{ form_end(formProduit) }} {# fermeture de la balise form #}
+{% endblock %}

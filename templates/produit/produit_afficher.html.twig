@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+
+{% block h1 %}Gestion des produits ({{ produits|length }}){% endblock %}
+
+{% block body %}
+<a class="btn btn_dark" href="{{path('produit_ajouter')}}">Ajouter</a>
+{#Sur le template produit_ajouter.html.twig, ajouter également une redirection pour revenir sur la route produit_afficher#}
+
+{#{dump(produit)}#}
+
+{#//condition s'il y a des produits ou pas #}
+{% if produits %}
+     <table class="table text_center table-bordered mt-4">
+        <thead class="table-dark">
+           <tr>
+                <th>ID</th>
+                <th>Titre</th>
+                <th>Prix (€)</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Fiche</th>
+                <th>Modifier</th>
+                <th>Supprimer</th>
+     </tr>
+     
+        </thead>
+
+
+        <tbody>
+        
+        {% for produit in produits %}
+            {#{{dump(produit)}}#}
+        {#
+        produits est un tableau d'objets en le bouclant, on extrait donc un objet à chaque tour
+        on affiche pas un objet, mais une propriete de l'objet 
+        syntaxe : objet.propriété
+        #}
+        <tr>
+            <td>{{produit.id}}</td>
+            <td>{{ produit.titre}}</td>
+            <td>{{produit.prix}}</td>
+            <td>
+             {% if produit.description %}
+                {{ produit.description}}
+             {% else %}
+                <span class="fst-italic text-danger"> Non renseignée</span>
+             
+             {% endif %}
+             
+            </td>
+
+            <td>
+            {% if produit.category %}
+            {{ produit.category.nom }}
+            {% else %}
+               <span class="fst-italic text-danger"> Non renseignée</span>
+            
+            {% endif %}
+            
+            </td>
+
+            <td>
+            <a href="{{    path(  'produit_fiche' , {'id': produit.id}    )         }}">F</a>
+            </td>
+            <td>
+            <a href="{{ path('produit_modifier', {'id' : produit.id }  ) }}">M</a>
+            </td>
+            <td>
+            <a 
+             onclick="return confirm('êtes-vous sûr de vouloir supprimer ce produit ?')" 
+            href="{{ path('produit_supprimer', {'id' : produit.id }) }}">S</a>
+            </td>
+        </tr>
+       
+            
+        {% endfor %}
+             
+        
+        </tbody>
+     
+     </table>
+
+{% else %}
+    <h4 class="text-danger text-center fst_italic mt-4">Aucun produit</h4>
+
+{% endif %}
+
+
+
+
+{% endblock %}

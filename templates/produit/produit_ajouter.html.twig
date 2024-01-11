@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}Ajouter un produit{% endblock %}
+
+
+{% block body %}
+<a class="btn btn-dark" href="{{path('produit_afficher')}}">Retour</a> 
+{#Sur le template produit_ajouter.html.twig, ajouter également une redirection pour revenir sur la route produit_afficher#}
+
+{#l'objet permet de construire le formulaire
+        chaque methode add() va correspondre à un element du formulaire
+
+
+{# 
+        Il existe 2 façons d'afficher un formulaire
+
+        1-
+        {{ form(formProduit) }}
+        La fonction twig form() permet d'afficher un formulaire,
+        Son argument est la vue du formulaire
+
+
+        2-
+        toutes les autres fonctions twig
+        form_start() - form_end()
+
+        pour appeler un élément du formulaire on utilise la fonction
+        form_row() 
+        syntaxe : parent.enfant
+
+        form_row() = form_label() + form_widget() + form_help() + form_errors()
+    #}
+        
+
+
+{{ form_start(formProduit)}} {# ouverture de la balise form#}
+
+<div class="row"> 
+<div class="col-6">
+    {{ form_row(formProduit.titre)}}
+</div>
+<div class="col-6">
+    {{ form_row(formProduit.prix)}}
+</div>
+</div>
+
+
+  {# {{ form_row(formProduit.description)}}  #}
+
+  {{ form_widget(formProduit.description)}}
+  {{ form_label(formProduit.description)}}
+  {{ form_help(formProduit.description)}}
+  {{ form_errors(formProduit.description)}}
+
+   {{ form_rest(formProduit)}}
+
+<input type="submit" value="Ajouter"  class="btn btn-success w-100" >
+
+{{form_end(formProduit)}}  {# fermeture de la balise form #}
+
+
+
+
+
+{#<form action="">
+
+<label for="">Prénom</label>
+<input type="text">
+
+<label for="">Nom</label>
+<input type="password">
+
+<label for="">Nom</label>
+<input type="color">
+
+<textarea name="" id="" cols="30" rows="10"></textarea>
+
+<select name="" id="">
+<option value="">test</option>
+<option value="">test</option>
+<option value="">test</option>
+<option value="">test</option>
+<option value="">test</option>
+</select>
+
+
+</form>#}
+{#
+la fonction twig form() permet d'afficher un formuliare. son argument est la vue du formuliare
+#}
+
+{% endblock %}

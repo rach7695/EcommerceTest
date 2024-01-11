@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}{# héritage du fichier "moule" base.html.twig #}
+
+
+{% block h1 %}Page d'accueil{% endblock %}
+
+{% block body %}
+<h2>Bonjour {{prenomTwig}}</h2>
+
+{#{{dump(prenomTwig)}}#}
+<img src="{{asset('images/Landscape-Color.jpg')}}" alt="" class="img500px">
+{% endblock %}
+
+
